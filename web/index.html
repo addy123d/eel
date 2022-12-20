@@ -81,16 +81,20 @@
         <img src="./images/logo.webp" alt="" />
       </div>
 
+      <div class="status">
+        <h2 id="led-status" style="text-align: center;"></h2>
+      </div>
+
       <div class="buttons">
         <div class="button-container">
           <div class="heading">
             <h1>Controller Setup</h1>
           </div>
           <div class="button-1">
-            <button class="btn1">LED ON</button>
+            <button class="btn1">Switch On</button>
           </div>
-          <div class="button-2">
-            <button class="btn2">LED OFF</button>
+          <div class="button-1">
+            <button class="btn2">Switch Off</button>
           </div>
         </div>
       </div>
@@ -99,15 +103,26 @@
   <script src="/eel.js"></script>
   <script>
 
+    const status = document.getElementById("led-status");
+
     document.querySelector('.btn1').addEventListener('click',()=>{
-      eel.get_data('Hello from Button-1')
+      eel.get_data('1')
+    },false)
+
+    document.querySelector('.btn2').addEventListener('click',()=>{
+      eel.get_data('0')
     },false)
 
 
     eel.expose(send_data);
 
     function send_data(value){
-      alert(value);
+      let message = `Led Status is ${value}`;
+      if(value == "1"){
+        status.innerText = "LED Status is On"
+      }else{
+        status.innerText = "LED Status is Off"
+      }
     }
   
   </script>
